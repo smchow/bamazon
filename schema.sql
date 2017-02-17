@@ -38,3 +38,13 @@ CREATE TABLE products (
   PRIMARY KEY(id),
   FOREIGN KEY(department_id) REFERENCES departments(id)
 );
+
+CREATE TABLE sales(
+id int AUTO_INCREMENT,
+product_id int,
+quantity_purchased int,
+created_at  datetime,
+PRIMARY KEY(id),
+  FOREIGN KEY(product_id) REFERENCES products(id)
+)
+
