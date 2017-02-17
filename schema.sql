@@ -39,6 +39,12 @@ CREATE TABLE products (
   FOREIGN KEY(department_id) REFERENCES departments(id)
 );
 
+INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES ("Iron",  1, 28.99, 15);
+INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES ("Alarm Clock", 1 , 9.99 , 20);
+INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES ("Thermometer", 4, 9.99, 25);
+INSERT INTO products (product_name, department_id, price, stock_quantity) VALUES ("Teether", 2, 4.99, 20);
+
+
 CREATE TABLE sales(
 id int AUTO_INCREMENT,
 product_id int,
