@@ -1,5 +1,6 @@
 
 var mysql      = require('mysql');
+var inquirer   = require('inquirer');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
@@ -9,13 +10,56 @@ var connection = mysql.createConnection({
  
 connection.connect();
  
-connection.query('select * from products, departments where products.department_id = departments.id;', function (error, results, fields){
+connection.query('select products.id as id, product_name, price  from products, departments where products.department_id = departments.id;', function (error, results, fields){
   if (error) throw error;
   console.log(results);
-  for (var i =0 ; i < results.length ; i++){
+  /*for (var i =0 ; i < results.length ; i++){
   	  console.log(results[i].department_name);
   }
+});*/
+inquirer.prompt([
+  {type: "input",
+    name: "product_id",
+    message: "Enter the id of the product you want to purchase"},
+    {type: "input",
+    name: "quantity",
+    message: "How many do you want to purchase"}
+  ]).then(function(data){
+    var product_id = data.product_id;
+    var quantity = data.quantity;
+//INSERT INTO departments (department_name, over_head_costs) VALUES ("Appliances",  5000);
+
+    connection.query('INSERT INTO sales SET ?', {
+      product_id:producti_id,
+      quantity: quantity
+      },function (error, results, fields) {
+        console.log(error);
+        console.log('insert complete');
+     /* console.log(results);
+      console.log('\n');
+      inquirer.prompt([
+      {type: "input",
+        name: "beer_id",
+        message: "Put the id of the beer that you want."}
+      ]).then(function(data){
+        //do an insert into mysql 
+        /*connection.query('INSERT into dranken_beers SET ?', {
+          beer_id : data.beer_id,
+          dranker_id : dranker
+        }, function (error, results, fields) {
+          console.log('insert complete')
+        });
+      });*/
+    });
+
+  });
 });
+
+
+// //write update function
+// function updateTable(id, table){
+//  connection.query("UPDATE " + table + " SET ? WHERE ?", [{
+
  
 /*function insertIntoBeers(name, type, abv){
   connection.query("INSERT INTO beers SET ?", {

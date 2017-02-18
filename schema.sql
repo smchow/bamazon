@@ -49,7 +49,7 @@ CREATE TABLE sales(
 id int AUTO_INCREMENT,
 product_id int,
 quantity_purchased int,
-created_at  datetime,
+created_at  datetime DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY(id),
   FOREIGN KEY(product_id) REFERENCES products(id)
 )
